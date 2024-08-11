@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Trip -contact</title>
+    <link rel="stylesheet" href="contact.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <!-- navbar -->
+    <nav class="nav">
+        <input type="checkbox" id="nav-check">
+        <div class="logo">
+            <span class="text">
+                Go Trip
+            </span>
+        </div>
+        <div class="nav-btn" onclick="toggleMenu()">
+            <label for="nav-check">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </div>
+
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="tour.html">Destination</a></li>
+            <li><a href="package.html">Packages</a></li>
+            <li><a href="contact.html">Contact</a></li>
+
+            <li><a href="login.html">Login</a></li>
+
+        </ul>
+    </nav>
+
+
+    <!-- card -->
+
+    
+    <div class="container">
+        <div class="card">
+            <h3>Get in Touch</h3>
+            <form id="contactForm">
+                <div class="input-control">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" required minlength="2" maxlength="30">
+                    <div class="errorMessages" id="firstNameError"></div>
+                </div>
+                <div class="input-control">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" required minlength="2" maxlength="30">
+                    <div class="errorMessages" id="lastNameError"></div>
+                </div>
+                <div class="input-control">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                    <div class="errorMessages" id="emailError"></div>
+                </div>
+                <div class="input-control">
+                    <label for="enquiry">Enquiry</label>
+                    <textarea id="enquiry" name="enquiry" required minlength="10" maxlength="500"></textarea>
+                    <div class="errorMessages" id="enquiryError"></div>
+                </div>
+                <button type="submit" id="submit">Submit</button>
+            </form>
+
+        </div>
+    </div>
+<!-- footer -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-row">
+            <!-- About Us Section -->
+            <div class="footer-col">
+                <h3>About Us</h3>
+                <p>
+                    Go Trip is your one-stop solution for all your travel needs. We offer the best travel packages, 
+                    destination guides, and travel planning services to make your trip unforgettable.
+                </p>
+            </div>
+
+            
+
+            <!-- Social Media Section -->
+            <div class="footer-col">
+                <h3 class="socials">Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/?lang=en"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/accounts/login/?hl=en"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Copyright Section -->
+        <div class="footer-bottom">
+            <p>&copy; 2024 Go Trip. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+
+</body>
+
+<script>
+    const submit = document.getElementById("submit");
+    const contactForm = document.getElementById("contactForm");
+    const firstNameError = document.getElementById("firstNameError");
+    const lastNameError = document.getElementById("lastNameError");
+    const emailError = document.getElementById("emailError");
+    const enquiryError = document.getElementById("enquiryError");
+
+    contactForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const { firstName, lastName, email, enquiry } = contactForm.elements;
+
+        // Clear previous error messages
+        firstNameError.innerHTML = "";
+        lastNameError.innerHTML = "";
+        emailError.innerHTML = "";
+        enquiryError.innerHTML = "";
+
+        let hasError = false;
+
+        // Validate first name
+        if (!firstName.value.trim() || !isValidName(firstName.value)) {
+            displayError(firstNameError, "First name must be between 2 and 30 characters and contain only letters.");
+            hasError = true;
+        }
+
+        // Validate last name
+        if (!lastName.value.trim() || !isValidName(lastName.value)) {
+            displayError(lastNameError, "Last name must be between 2 and 30 characters and contain only letters.");
+            hasError = true;
+        }
+
+        // Validate email
+        if (!email.value.trim() || !isValidEmail(email.value)) {
+            displayError(emailError, "Please enter a valid email address.");
+            hasError = true;
+        }
+
+        // Validate enquiry
+        if (!enquiry.value.trim() || enquiry.value.length < 10) {
+            displayError(enquiryError, "Enquiry must be at least 10 characters long.");
+            hasError = true;
+        }
+
+        if (!hasError) {
+            alert("Your enquiry has been submitted successfully!");
+            contactForm.reset(); // Reset form after successful submission
+        }
+    });
+
+    function displayError(element, message) {
+        element.innerHTML = `<div>${message}</div>`;
+    }
+
+    function isValidName(name) {
+        return /^[a-zA-Z\s]{2,30}$/.test(name);
+    }
+
+    function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+
+</script>
+
+</html>

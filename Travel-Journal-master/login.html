@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Trip - register</title>
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="register.css">
+</head>
+
+<body>
+    <nav class="nav">
+        <input type="checkbox" id="nav-check">
+        <div class="logo">
+            <span class="text">
+                Go Trip
+            </span>
+        </div>
+        <div class="nav-btn">
+            <label for="nav-check">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </div>
+
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="tour.html">Destination</a></li>
+            <li><a href="package.html">Packages</a></li>
+            <li><a href="contact.html">Contact</a></li>
+
+
+        </ul>
+    </nav>
+    <main>
+        <div class="container">
+            <div class="card">
+                <h3>Login</h3>
+                <form id="loginForm">
+
+                    <div class="input-control">
+
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email" required>
+                        <div class="errorMessages" id="emailError"></div>
+                    </div>
+                    <div class="input-control">
+
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                        <div class="errorMessages" id="passwordError"></div>
+                    </div>
+                    <button type="submit" id="submit">Login</button>
+
+                    <div class="redirect">
+                        <p class="label">Don't have an account? <a href="register.html">Register</a></p>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-row">
+                <!-- About Us Section -->
+                <div class="footer-col">
+                    <h3>About Us</h3>
+                    <p>
+                        Go Trip is your one-stop solution for all your travel needs. We offer the best travel packages, 
+                        destination guides, and travel planning services to make your trip unforgettable.
+                    </p>
+                </div>
+    
+                
+    
+                <!-- Social Media Section -->
+                <div class="footer-col">
+                    <h3 class="socials">Follow Us</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/?lang=en"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/accounts/login/?hl=en"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Copyright Section -->
+            <div class="footer-bottom">
+                <p>&copy; 2024 Go Trip. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+<script>
+    // Hamburger menu toggle
+
+
+    const submit = document.getElementById("submit");
+    const loginForm = document.getElementById("loginForm");
+    const emailError = document.getElementById("emailError");
+    const passwordError = document.getElementById("passwordError");
+
+    loginForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const { email, password } = loginForm.elements
+
+        emailError.innerHTML = "";
+        passwordError.innerHTML = "";
+
+        let hasError = false;
+
+
+        if (!email.value.trim() || !isValidEmail(email.value)) {
+            displayError(emailError, "Please enter a valid email address.");
+            hasError = true;
+
+        }
+
+        if (!password.value.trim() || !isStrongPassword(password.value)) {
+            displayError(passwordError, "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.");
+            hasError = true;
+        }
+
+        if (!hasError) {
+
+            window.location.href = "/"
+        }
+
+
+    });
+
+    function displayError(element, message) {
+        element.innerHTML = `<div>${message}</div>`
+    }
+
+
+    function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function isStrongPassword(password) {
+        return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/.test(password);
+    }
+
+
+</script>
+
+</html>
